@@ -121,20 +121,20 @@
 </div>
 
 
-<p-home-dialog header="Register Storage Backend" [(visible)]="showRegisterFlag" [width]="510" [height]="790" modal="modal" [style]="{'opacity':'0.95','right':'46px','top':'80px','background':'rgb(44,63,97)'}" >
+<p-home-dialog class="register-storage-backend" header="Register Storage Backend" [(visible)]="showRegisterFlag" [width]="510" [height]="790" modal="modal" [style]="{'opacity':'0.95','right':'46px','top':'80px','background':'rgb(44,63,97)'}" >
         <form [grid]="{label: 'ui-g-5', content:'ui-g-20'}" [formGroup]="backendForm" [errorMessage]="errorMessage">
             <form-item label="Name" [required]="true">
                 <input id="name" type="text" name="name" formControlName="name"  pInputText />
             </form-item>
             <form-item label="Type" [required]="true">
-                <p-dropdown [style]="{'min-width':'220px'}" (onChange)="selectOption()" placeholder="Please select" formControlName="type" [options]="allTypes"  ></p-dropdown>
+                <p-dropdown inputId="type-select" name="type-select" [style]="{'min-width':'220px'}" (onChange)="selectOption()" placeholder="Please select" formControlName="type" [options]="allTypes"  ></p-dropdown>
             </form-item>
             <form-item *ngFor="let item of formItemCopy" [label]="item.label" [required]="item.required">
                 <input [id]="item.id" [type]="item.type" [name]="item.name"  [formControlName]="item.formControlName"  pInputText />
             </form-item>
         </form>
         <div style="margin-top:100px;">
-            <button type="button" class="ui-button-secondary" pButton (click)="createBackend()" label="{{I18N.keyID['ok']}}" ></button>
+            <button type="button" class="ui-button-secondary add-backend-submit-btn" pButton (click)="createBackend()" label="{{I18N.keyID['ok']}}" ></button>
         </div>
 </p-home-dialog>
 <p-home-dialog header="Storage Backends" [(visible)]="showBackends" [width]="710" [height]="790" modal="modal" [style]="{'opacity':'0.8','right':'46px','top':'80px','background':'rgb(44,63,97)'}" >

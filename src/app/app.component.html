@@ -1,4 +1,4 @@
-<div class="layout-wrapper" [style.display]="hideLoginForm ? 'none' : 'block'">
+<div id="login-form-container" class="layout-wrapper" [style.display]="hideLoginForm ? 'none' : 'block'">
     <div class="login-bg" #loginBG style="background-position: center" [ngClass]="{'login-animation':showLoginAnimation, 'logout-animation':showLogoutAnimation}"></div>
     <div class="login-form ui-fluid" *ngIf="!isLogin">
         <div class="logo"></div>
@@ -13,13 +13,13 @@
                     </span>
                 </div>
             </div>
-            <p><button pButton type="button" label="Login" (click)="login()" class="ui-button-secondary ui-button-large"></button></p>
+            <p><button pButton type="button" label="Login" (click)="login()" class="ui-button-secondary ui-button-large login-submit-btn"></button></p>
         </div>
     </div>
 </div>
 
 
-<div class="layout-wrapper" (mousemove)="refreshLastTime()" *ngIf="isLogin">
+<div id="home-container" class="layout-wrapper" (mousemove)="refreshLastTime()" *ngIf="isLogin">
     <div id="layout-topbar">
         <div class="user-info">
             <div>

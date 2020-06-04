@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites disabled="0" errors="0" failures="2" tests="9" time="33.298">
+ <testsuite name="Login page" timestamp="2020-01-28T21:07:31" hostname="localhost" time="21.867" errors="0" tests="3" skipped="0" disabled="0" failures="1">
+  <testcase classname="Login page" name="should display an error message to the user if the backend is not ready or down" time="7.312">
+   <failure type="toEqual" message="Expected &apos;Incorrect username or password!&apos; to equal &apos;Internal Server Error!&apos;."><![CDATA[Error: Failed expectation
+    at UserContext.<anonymous> (/home/root1/anvith_workspace/opensds/opensds-dashboard/workfolder/opensds-dashboard/e2e/app.e2e-spec.ts:21:41)
+    at /home/root1/.nvm/versions/node/v8.16.2/lib/node_modules/protractor/node_modules/jasminewd2/index.js:112:25
+    at new ManagedPromise (/home/root1/.nvm/versions/node/v8.16.2/lib/node_modules/protractor/node_modules/selenium-webdriver/lib/promise.js:1077:7)
+    at ControlFlow.promise (/home/root1/.nvm/versions/node/v8.16.2/lib/node_modules/protractor/node_modules/selenium-webdriver/lib/promise.js:2505:12)
+    at schedulerExecute (/home/root1/.nvm/versions/node/v8.16.2/lib/node_modules/protractor/node_modules/jasminewd2/index.js:95:18)
+    at TaskQueue.execute_ (/home/root1/.nvm/versions/node/v8.16.2/lib/node_modules/protractor/node_modules/selenium-webdriver/lib/promise.js:3084:14)
+    at TaskQueue.executeNext_ (/home/root1/.nvm/versions/node/v8.16.2/lib/node_modules/protractor/node_modules/selenium-webdriver/lib/promise.js:3067:27)
+    at asyncRun (/home/root1/.nvm/versions/node/v8.16.2/lib/node_modules/protractor/node_modules/selenium-webdriver/lib/promise.js:2974:25)
+    at /home/root1/.nvm/versions/node/v8.16.2/lib/node_modules/protractor/node_modules/selenium-webdriver/lib/promise.js:668:7]]>
+   </failure>
+  </testcase>
+  <testcase classname="Login page" name="should display an error message to the user if they provided incorrect credentials" time="5.341" />
+  <testcase classname="Login page" name="should redirect the user to the dashboard page if they provided correct credentials" time="9.211" />
+ </testsuite>
+ <testsuite name="Home page" timestamp="2020-01-28T21:07:53" hostname="localhost" time="11.431" errors="0" tests="6" skipped="0" disabled="0" failures="1">
+  <testcase classname="Home page" name="should be in the home page" time="7.311" />
+  <testcase classname="Home page" name="should open Add Backend Dialog" time="1.062" />
+  <testcase classname="Home page" name="should successfully Add a backend of type AWS" time="0.001" />
+  <testcase classname="Home page" name="should successfully Add a backend of type Huawei OBS" time="0.002" />
+  <testcase classname="Home page" name="should successfully Add a backend of type Azure" time="0.001" />
+  <testcase classname="Home page" name="should successfully Add a backend of type YIG" time="1.72">
+   <failure type="exception" message="Failed: No element found using locator: By(css selector, *[id=&quot;endpoint&quot;])"><![CDATA[NoSuchElementError: No element found using locator: By(css selector, *[id="endpoint"])
+    at elementArrayFinder.getWebElements.then (/home/root1/.nvm/versions/node/v8.16.2/lib/node_modules/protractor/built/element.js:814:27)
+    at ManagedPromise.invokeCallback_ (/home/root1/.nvm/versions/node/v8.16.2/lib/node_modules/protractor/node_modules/selenium-webdriver/lib/promise.js:1376:14)
+    at TaskQueue.execute_ (/home/root1/.nvm/versions/node/v8.16.2/lib/node_modules/protractor/node_modules/selenium-webdriver/lib/promise.js:3084:14)
+    at TaskQueue.executeNext_ (/home/root1/.nvm/versions/node/v8.16.2/lib/node_modules/protractor/node_modules/selenium-webdriver/lib/promise.js:3067:27)
+    at asyncRun (/home/root1/.nvm/versions/node/v8.16.2/lib/node_modules/protractor/node_modules/selenium-webdriver/lib/promise.js:2927:27)
+    at /home/root1/.nvm/versions/node/v8.16.2/lib/node_modules/protractor/node_modules/selenium-webdriver/lib/promise.js:668:7
+    at <anonymous>
+    at process._tickCallback (internal/process/next_tick.js:189:7)Error: 
+    at ElementArrayFinder.applyAction_ (/home/root1/.nvm/versions/node/v8.16.2/lib/node_modules/protractor/built/element.js:459:27)
+    at ElementArrayFinder.(anonymous function).args [as sendKeys] (/home/root1/.nvm/versions/node/v8.16.2/lib/node_modules/protractor/built/element.js:91:29)
+    at ElementFinder.(anonymous function).args [as sendKeys] (/home/root1/.nvm/versions/node/v8.16.2/lib/node_modules/protractor/built/element.js:831:22)
+    at HomePage.tryAddYIGBackend (/home/root1/anvith_workspace/opensds/opensds-dashboard/workfolder/opensds-dashboard/e2e/home/home.po.ts:65:32)
+    at UserContext.<anonymous> (/home/root1/anvith_workspace/opensds/opensds-dashboard/workfolder/opensds-dashboard/e2e/home/home.e2e-spec.ts:36:14)
+    at /home/root1/.nvm/versions/node/v8.16.2/lib/node_modules/protractor/node_modules/jasminewd2/index.js:112:25
+    at new ManagedPromise (/home/root1/.nvm/versions/node/v8.16.2/lib/node_modules/protractor/node_modules/selenium-webdriver/lib/promise.js:1077:7)
+    at ControlFlow.promise (/home/root1/.nvm/versions/node/v8.16.2/lib/node_modules/protractor/node_modules/selenium-webdriver/lib/promise.js:2505:12)
+    at schedulerExecute (/home/root1/.nvm/versions/node/v8.16.2/lib/node_modules/protractor/node_modules/jasminewd2/index.js:95:18)
+    at TaskQueue.execute_ (/home/root1/.nvm/versions/node/v8.16.2/lib/node_modules/protractor/node_modules/selenium-webdriver/lib/promise.js:3084:14)
+From: Task: Run it("should successfully Add a backend of type YIG") in control flow
+    at UserContext.<anonymous> (/home/root1/.nvm/versions/node/v8.16.2/lib/node_modules/protractor/node_modules/jasminewd2/index.js:94:19)
+    at attempt (/home/root1/.nvm/versions/node/v8.16.2/lib/node_modules/protractor/node_modules/jasmine-core/lib/jasmine-core/jasmine.js:4297:26)
+    at QueueRunner.run (/home/root1/.nvm/versions/node/v8.16.2/lib/node_modules/protractor/node_modules/jasmine-core/lib/jasmine-core/jasmine.js:4217:20)
+    at QueueRunner.execute (/home/root1/.nvm/versions/node/v8.16.2/lib/node_modules/protractor/node_modules/jasmine-core/lib/jasmine-core/jasmine.js:4199:10)
+    at Spec.queueRunnerFactory (/home/root1/.nvm/versions/node/v8.16.2/lib/node_modules/protractor/node_modules/jasmine-core/lib/jasmine-core/jasmine.js:909:35)
+    at Spec.execute (/home/root1/.nvm/versions/node/v8.16.2/lib/node_modules/protractor/node_modules/jasmine-core/lib/jasmine-core/jasmine.js:526:10)
+    at UserContext.fn (/home/root1/.nvm/versions/node/v8.16.2/lib/node_modules/protractor/node_modules/jasmine-core/lib/jasmine-core/jasmine.js:5340:37)
+    at attempt (/home/root1/.nvm/versions/node/v8.16.2/lib/node_modules/protractor/node_modules/jasmine-core/lib/jasmine-core/jasmine.js:4297:26)
+    at QueueRunner.run (/home/root1/.nvm/versions/node/v8.16.2/lib/node_modules/protractor/node_modules/jasmine-core/lib/jasmine-core/jasmine.js:4217:20)
+    at runNext (/home/root1/.nvm/versions/node/v8.16.2/lib/node_modules/protractor/node_modules/jasmine-core/lib/jasmine-core/jasmine.js:4257:20)
+From asynchronous test: 
+Error: 
+    at Suite.<anonymous> (/home/root1/anvith_workspace/opensds/opensds-dashboard/workfolder/opensds-dashboard/e2e/home/home.e2e-spec.ts:35:5)
+    at addSpecsToSuite (/home/root1/.nvm/versions/node/v8.16.2/lib/node_modules/protractor/node_modules/jasmine-core/lib/jasmine-core/jasmine.js:1107:25)
+    at Env.describe (/home/root1/.nvm/versions/node/v8.16.2/lib/node_modules/protractor/node_modules/jasmine-core/lib/jasmine-core/jasmine.js:1074:7)
+    at describe (/home/root1/.nvm/versions/node/v8.16.2/lib/node_modules/protractor/node_modules/jasmine-core/lib/jasmine-core/jasmine.js:4399:18)
+    at Object.<anonymous> (/home/root1/anvith_workspace/opensds/opensds-dashboard/workfolder/opensds-dashboard/e2e/home/home.e2e-spec.ts:4:1)
+    at Module._compile (module.js:653:30)
+    at Module.m._compile (/home/root1/anvith_workspace/opensds/opensds-dashboard/workfolder/opensds-dashboard/node_modules/ts-node/src/index.ts:422:23)
+    at Module._extensions..js (module.js:664:10)
+    at Object.require.extensions.(anonymous function) [as .ts] (/home/root1/anvith_workspace/opensds/opensds-dashboard/workfolder/opensds-dashboard/node_modules/ts-node/src/index.ts:425:12)]]>
+   </failure>
+  </testcase>
+ </testsuite>
+</testsuites>
