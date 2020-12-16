@@ -83,7 +83,8 @@ export const Consts = {
         DELFIN : {
             'storages' : 'resource-monitor/storages',
             'storagePools' : 'resource-monitor/storage-pools',
-            'volumes' : 'resource-monitor/volumes'
+            'volumes' : 'resource-monitor/volumes',
+            'alerts' : 'alertmanager/alerts'
         }
     },
     AWS_VOLUME_TYPES: [

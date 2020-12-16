@@ -103,10 +103,6 @@ export class StorageDetailsComponent implements OnInit {
             { 
                 label: "Storages", 
                 url: '/resource-monitor' 
-            },
-            { 
-                label: "Storage Details", 
-                url: '/storageDetails' 
             }
         ];
         this.getStorageVolumes(this.selectedStorageId);
@@ -457,8 +453,49 @@ export class StorageDetailsComponent implements OnInit {
     }
 
     getAllActiveAlerts(storageId){
-        this.ds.getAlertsByStorageId(storageId).subscribe((res)=>{
-            this.allActiveAlerts = res.json().alerts;
+        this.ds.getAllAlerts().subscribe((res)=>{
+            let alertsFromAlertManager = res.json().data;
+            alertsFromAlertManager.forEach(element => {
+                console.log("element", element);
+                console.log("Selected Stroage", storageId);
+                if(element.labels.storage_id == storageId){
+                    console.log("Matched");
+                    let alert = {
+                        'alert_id' : '',
+                        'alert_name' : '',
+                        'severity' : '',
+                        'category' : '',
+                        'type' : '',
+                        'sequence_number' : 0,
+                        'occur_time' : 0,
+                        'description' : '',
+                        'resource_type' : '',
+                        'location' : '',
+                        'storage_id' : '',
+                        'storage_name' : '',
+                        'vendor' : '',
+                        'model' : '',
+                        'serial_number' : '',
+                        'recovery_advice' : ''
+                    };
+                    alert.alert_id = element.alert_id;
+                    alert.alert_name = element.labels.alertname;
+                    alert.severity = element.labels.severity;
+                    alert.category = element.labels.category;
+                    alert.type = element.labels.type;
+                    alert.occur_time = element.startsAt;
+                    alert.description = element.annotations.description;
+                    alert.resource_type = element.labels.resource_type;
+                    alert.location = element.labels.location;
+                    alert.storage_id = element.labels.storage_id;
+                    alert.storage_name = element.labels.storage_name;
+                    alert.vendor = element.labels.vendor;
+                    alert.model = element.labels.model;
+                    alert.serial_number = element.labels.serial_number;
+                    alert.recovery_advice = element.labels.recovery_advice;
+                    this.allActiveAlerts.push(alert);
+                }
+            });
         }, (error)=>{
             this.allActiveAlerts = [];
             console.log("Something went wrong. Could not fetch alerts.", error);
@@ -466,112 +503,7 @@ export class StorageDetailsComponent implements OnInit {
             let errorMsg = 'Error fetching alerts.' + error.error_msg;
             this.msgs.push({severity: 'error', summary: 'Error', detail: error});
         })
-        // FIXME ALERTS DUMMY DATA
-        /* this.allActiveAlerts.push(
-            {
-                'alert_id' : '255911',
-                'alert_name' : 'TP VV allocation failure',
-                'severity' : 'Critical',
-                'category' : 'Fault',
-                'type' : 'EquipmentAlarm',
-                'sequence_number' : 657,
-                'occur_time' : 1514140673000,
-                'description' : 'Thin provisioned VV LUN_performance_test.531 unable to allocate SD space from CPG cpg_zhu',
-                'resource_type' : 'Storage',
-                'location' : 'sw_vv:20656:LUN_performance_test.899',
-                'storage_id' : '4ec28b27-0d3d-4876-8da7-a16876ea489c',
-                'storage_name' : 'HPEDevice',
-                'vendor' : 'HPE',
-                'model' : 'HP_3PAR 8450',
-                'serial_number' : 'XXYYZZ1234'
-            },
-            {
-                'alert_id' : '255912',
-                'alert_name' : 'Storage Array Usable Free Space is less than 20%',
-                'severity' : 'Critical',
-                'category' : 'Fault',
-                'type' : 'EquipmentAlarm',
-                'sequence_number' : 658,
-                'occur_time' : 1514140673010,
-                'description' : 'Storage Array Usable Free Space is less than 20% was triggered.',
-                'resource_type' : 'Storage',
-                'location' : 'sw_vv:20656:LUN_performance_test.900',
-                'storage_id' : '4ec28b27-0d3d-4876-8da7-a16876ea479c',
-                'storage_name' : 'DellVMAX250F',
-                'vendor' : 'Dell EMC',
-                'model' : 'VMAX250F',
-                'serial_number' : 'XXYY5678'
-            },
-            {
-                'alert_id' : '255915',
-                'alert_name' : 'Pool Usable Free Space is less than 20%',
-                'severity' : 'Warning',
-                'category' : 'Fault',
-                'type' : 'EquipmentAlarm',
-                'sequence_number' : 659,
-                'occur_time' : 1514140674050,
-                'description' : 'Pool Usable Free Space is less than 20% was triggered.',
-                'resource_type' : 'Storage',
-                'location' : 'sw_vv:20656:LUN_performance_test.900',
-                'storage_id' : '4ec28b27-0d3d-4876-8da7-a16876ea479c',
-                'storage_name' : 'OceanStorV3',
-                'vendor' : 'Huawei',
-                'model' : 'OceanStor V3',
-                'serial_number' : 'XXYY9101'
-            },
-            {
-                'alert_id' : '255811',
-                'alert_name' : 'TP VV allocation failure',
-                'severity' : 'Critical',
-                'category' : 'Fault',
-                'type' : 'EquipmentAlarm',
-                'sequence_number' : 657,
-                'occur_time' : 1514140673000,
-                'description' : 'Thin provisioned VV LUN_performance_test.531 unable to allocate SD space from CPG cpg_zhu',
-                'resource_type' : 'Storage',
-                'location' : 'sw_vv:20656:LUN_performance_test.899',
-                'storage_id' : '4ec28b27-0d3d-4876-8da7-a16876ea489c',
-                'storage_name' : 'HPEDevice',
-                'vendor' : 'HPE',
-                'model' : 'HP_3PAR 8450',
-                'serial_number' : 'XXYYZZ1234'
-            },
-            {
-                'alert_id' : '255812',
-                'alert_name' : 'Storage Array Usable Free Space is less than 20%',
-                'severity' : 'Critical',
-                'category' : 'Fault',
-                'type' : 'EquipmentAlarm',
-                'sequence_number' : 658,
-                'occur_time' : 1514140673010,
-                'description' : 'Storage Array Usable Free Space is less than 20% was triggered.',
-                'resource_type' : 'Storage',
-                'location' : 'sw_vv:20656:LUN_performance_test.900',
-                'storage_id' : '4ec28b27-0d3d-4876-8da7-a16876ea479c',
-                'storage_name' : 'DellVMAX250F',
-                'vendor' : 'Dell EMC',
-                'model' : 'VMAX250F',
-                'serial_number' : 'XXYY5678'
-            },
-            {
-                'alert_id' : '255815',
-                'alert_name' : 'Pool Usable Free Space is less than 20%',
-                'severity' : 'Warning',
-                'category' : 'Fault',
-                'type' : 'EquipmentAlarm',
-                'sequence_number' : 659,
-                'occur_time' : 1514140674050,
-                'description' : 'Pool Usable Free Space is less than 20% was triggered.',
-                'resource_type' : 'Storage',
-                'location' : 'sw_vv:20656:LUN_performance_test.900',
-                'storage_id' : '4ec28b27-0d3d-4876-8da7-a16876ea479c',
-                'storage_name' : 'OceanStorV3',
-                'vendor' : 'Huawei',
-                'model' : 'OceanStor V3',
-                'serial_number' : 'XXYY9101'
-            }
-        ); */
-        // FIXME ALERTS DUMMY DATA
+        
     }
     showPerfConfigDialog(){
         
