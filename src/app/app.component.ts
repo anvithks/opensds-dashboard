@@ -407,13 +407,35 @@ export class AppComponent implements OnInit, AfterViewInit {
                             uploadNum = 0;
                             self.progressValue = 0;
                         } else {
+                            let errMessage = {
+                                header: '',
+                                content: ''
+                            };
                             self.showPrompt = false;
                             uploadNum = 0;
                             self.progressValue = 0;
                             window['isUpload'] = false;
-                            self.msg.error("Upload failed. The network may be unstable. Please try again later.");
+                            let x2js = new X2JS();
+                            let jsonObj = x2js.xml_str2json(xhr.responseText);
+                            if(jsonObj.Error && jsonObj.Error.Code){
+                                errMessage['header'] = jsonObj.Error.Code;
+                                errMessage['content'] = jsonObj.Error.Message;
+                            } else{
+                                errMessage.content="Upload failed. The network may be unstable. Please try again later.";
+                            }
+                            
                             if(requestOptions.headers['X-Amz-Storage-Class']){
-                                self.msg.error("File ["+ selectFile.name +"] could not be archived.");
+                                errMessage.content+=". File ["+ selectFile.name +"] could not be archived."
+                                self.msg.error(errMessage);
+                                if (cb) {
+                                    cb();
+                                }
+                            } else{
+                                errMessage.content+=". File ["+ selectFile.name +"] could not be uploaded."
+                                self.msg.error(errMessage);
+                                if (cb) {
+                                    cb();
+                                }
                             }
                         }
                     };
@@ -428,15 +450,35 @@ export class AppComponent implements OnInit, AfterViewInit {
                             window['singleUpload'](selectFile, bucketId, options, uploadUrl, cb);
                             uploadNum++;
                         }else{
-                            this.showPrompt = false;
+                            let errMessage = {
+                                header: '',
+                                content: ''
+                            };
+                            self.showPrompt = false;
                             uploadNum = 0;
+                            self.progressValue = 0;
                             window['isUpload'] = false;
-                            this.msg.error("Upload failed. The network may be unstable. Please try again later.");
-                            if(requestOptions.headers['X-Amz-Storage-Class']){
-                                self.msg.error("File ["+ selectFile.name +"] could not be archived." + err);
+                            let x2js = new X2JS();
+                            let jsonObj = x2js.xml_str2json(xhr.responseText);
+                            if(jsonObj.Error && jsonObj.Error.Code){
+                                errMessage['header'] = jsonObj.Error.Code;
+                                errMessage['content'] = jsonObj.Error.Message;
+                            } else{
+                                errMessage.content="Upload failed. The network may be unstable. Please try again later.";
                             }
-                            if (cb) {
-                                cb();
+                            
+                            if(requestOptions.headers['X-Amz-Storage-Class']){
+                                errMessage.content+=". File ["+ selectFile.name +"] could not be archived."
+                                self.msg.error(errMessage);
+                                if (cb) {
+                                    cb();
+                                }
+                            } else{
+                                errMessage.content+=". File ["+ selectFile.name +"] could not be uploaded."
+                                self.msg.error(errMessage);
+                                if (cb) {
+                                    cb();
+                                }
                             }
                         }
                     }
@@ -696,7 +738,7 @@ export class AppComponent implements OnInit, AfterViewInit {
                 method: method,
                 path: canonicalUri,
                 service: service ? service : 's3',
-                region: region ? region : 'ap-south-1',
+                region: region ? region : 'us-east-1',
                 body: body ? body : '',
                 headers: {
                     'X-Auth-Token': localStorage['auth-token'],
@@ -704,7 +746,9 @@ export class AppComponent implements OnInit, AfterViewInit {
                 }
 
             }
-
+            if(region){
+                requestOptions['region'] = region;
+            }
             /****** 
             ToDo: 
             Currently we are checking for the known headers in our API requests and adding them to the signature generation. 
